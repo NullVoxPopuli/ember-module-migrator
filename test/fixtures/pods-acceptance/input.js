@@ -94,7 +94,6 @@ module.exports = {
       'blahzorz.js': '"blahzorz validator"'
     }
   },
-
   'tests': {
     'acceptance': {
       'post-test.js': '"post acceptance test"'
