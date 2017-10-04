@@ -117,6 +117,17 @@ describe('file-info model', function() {
         assert(component.destRelativePath === 'src/ui/routes/posts/index/-components/foo-bar/component.js');
       });
 
+      it('pods | detecting private / single use components (component only)', function() {
+        var routeTemplate = engine.fileInfoFor('app/pods/posts/index/template.hbs');
+        var component = engine.fileInfoFor('app/pods/foo-bar/component.js');
+
+        routeTemplate.registerRenderableUsage('foo-bar');
+
+        engine.finalizeFileDiscovery();
+
+        assert(component.destRelativePath === 'src/ui/routes/posts/index/-components/foo-bar/component.js');
+      });
+
       it('detecting private / single use helper', function() {
         var routeTemplate = engine.fileInfoFor('app/templates/posts/index.hbs');
         var helper = engine.fileInfoFor('app/helpers/bar.js');
