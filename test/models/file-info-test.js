@@ -20,6 +20,14 @@ describe('file-info model', function() {
       assert(file.destRelativePath === 'src/ui/routes/foo-bar.js');
     });
 
+    it('can calculate a destRelativePath where the base path is in the pods form', function() {
+      var file = engine.fileInfoFor('app/pods/foo-bar/route.js');
+
+      engine.finalizeFileDiscovery();
+
+      assert(file.destRelativePath === 'src/ui/routes/foo-bar.js');
+    });
+
     it('can calculate a destRelativePath where type is not the same as collection', function() {
       var file = engine.fileInfoFor('app/adapters/foo.js');
 
