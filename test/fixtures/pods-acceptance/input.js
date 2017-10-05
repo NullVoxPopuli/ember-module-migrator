@@ -24,11 +24,13 @@ module.exports = {
       },
       'index': {
         'template.hbs': 'index route template {{main-greeting-text}}',
+        'controller.js': '"index controller"',
+        'route.js': '"index route"',
       },
       'posts': {
         'index': {
-          'route.js': '"index route"',
-          'controller.js': '"index controller"',
+          'route.js': '"posts/index route"',
+          'controller.js': '"posts/index controller"',
           'template.hbs': 'posts/index route template',
         },
         'post': {
