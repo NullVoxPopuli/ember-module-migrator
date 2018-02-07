@@ -10,7 +10,7 @@ process.title = 'ember-module-migrator';
 
 var fs = require('fs');
 
-var Migrator = require('../lib');i
+var Migrator = require('../lib');
 
 var nopt = require("nopt");
 var options = {
