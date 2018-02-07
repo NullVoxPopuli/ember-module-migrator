@@ -28,7 +28,11 @@ ember-module-migrator
 ```
 
 After running the migrator itself, you will need to update several files
-to boot an application. The best path forward is to run the
+to boot an application in order to boot it.
+
+### Booting a migrated app
+
+The best path forward is to run the
 [ember-module-unification-blueprint](https://github.com/emberjs/ember-module-unification-blueprint)
 on the converted app:
 
@@ -38,13 +42,18 @@ on the converted app:
 # You may want to manually update the following packages before running the
 # `ember init` command:
 #
-#   npm i ember-resolver@^4.2.4 ember-cli@github:ember-cli/ember-cli --save-dev
+#   npm i ember-resolver@^4.3.0 ember-cli@github:ember-cli/ember-cli --save-dev
 #   npm uninstall ember-source --save
 #   bower install --save components/ember#canary
 #
 # If you are already running 2.14, you can jump right to the command:
 ember init -b ember-module-unification-blueprint
 ```
+Additionally any component names not in a template are not recognized by the
+migrator. For example if you have a computed property that returns the
+string `"widget/some-thing"` using that string with the `{{component` helper
+will now cause an error. You must convert these component named to not have `/`
+characters in their strings.
 
 ### Running module unification with fallback to classic app layout
 
@@ -56,8 +65,7 @@ directory for some files like initializers.
 To do this use a fallback resolver in `src/resolver.js`:
 
 ```js
-import ClassicResolver from 'ember-resolver';
-import Resolver from 'ember-resolver/resolvers/glimmer-wrapper';
+import Resolver from 'ember-resolver/resolvers/fallback';
 import buildResolverConfig from 'ember-resolver/ember-config';
 import config from '../config/environment';
 
@@ -68,20 +76,7 @@ let moduleConfig = buildResolverConfig(config.modulePrefix);
  */
 
 export default Resolver.extend({
-  config: moduleConfig,
-  init(options) {
-    this._super(options);
-    this._fallback = ClassicResolver.create(Object.assign({
-      namespace: { modulePrefix: config.modulePrefix }
-    }, options));
-  },
-  resolve(name, referrer) {
-    let result = this._super(name, referrer);
-    if (!result) {
-      result = this._fallback.resolve(name);
-    }
-    return result;
-  }
+  config: moduleConfig
 });
 ```
 
