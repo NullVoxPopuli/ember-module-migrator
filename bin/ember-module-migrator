@@ -25,7 +25,8 @@ var projectName = parsed['project-name'];
 
 var environment = require(projectRoot + '/config/environment.js');
 
-var podModulePrefix = environment.podModulePrefix;
+var modulePrefix = environment.modulePrefix;
+var podModulePrefix = environment.podModulePrefix.replace(modulePrefix + '\/', '');
 
 if (!projectName) {
   // determine name from package.json in projectRoot
