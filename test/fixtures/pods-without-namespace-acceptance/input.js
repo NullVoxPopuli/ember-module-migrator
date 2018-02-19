@@ -59,18 +59,20 @@ module.exports = {
       'main-greeting-text.js': '"main-greeting-text helper"',
       'show-default-title.js': '"show-default-title helper"'
     },
+    'post': {
+      'adapter.js': '"post adapter"',
+      'serializer.js': '"post serializer"',
+      'model.js': '"post model"'
+    },
     'adapters': {
       'application.js': '"application adapter"',
-      'post.js': '"post adapter"',
       'comment.js': '"comment adapter"'
     },
     'serializers': {
       'application.js': '"application serializer"',
-      'post.js': '"post serializer"',
       'comment.js': '"comment serializer"'
     },
     'models': {
-      'post.js': '"post model"',
       'comment.js': '"comment model"',
       'tag.js': '"tag model"'
     },
@@ -99,12 +101,10 @@ module.exports = {
       'post-test.js': '"post acceptance test"'
     },
     'unit': {
-      'custom-pods-namespace': {
-        'posts': {
-          'index': {
-            'route-test.js': '"posts/index unit test"',
-          },
-        },
+      'posts': {
+        'index': {
+          'route-test.js': '"posts/index unit test"',
+        }
       },
       'mixins': {
         'foo-test.js': '"foo mixin unit test"'
